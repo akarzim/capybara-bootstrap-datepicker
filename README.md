@@ -1,4 +1,49 @@
-capybara-bootstrap-datepicker
-=============================
+# Capybara::BootstrapDatepicker
 
 Helper for triggering date input for bootstrap-datepicker javascript library
+
+All this gem does is something very simple : allow you to trigger Bootstrap datepicker to select the date you want.
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'capybara-bootstrap-datepicker', group: :test
+
+Or, add it into your test group
+
+	group :test do
+		gem 'capybara-bootstrap-datepicker'
+		...
+	end
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install capybara-bootstrap-datepicker
+
+The gem automatically hook itself into rspec helper using Rspec.configure.
+
+## Usage
+
+Just use this method inside your capybara test:
+	select_date(2.weeks.ago, from: "Label of the date input")
+
+Or even:
+    select_date("2013-05-24", xpath: "//path_to//your_date_input", datepicker: :bootstrap)
+
+Available options are:
+    from - the label of your date input
+    xpath - the path to your date input
+    datepicker - the way to fill your date input (:bootstrap = by clicking the popover using [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker) ; by default it just fill the input date)
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
