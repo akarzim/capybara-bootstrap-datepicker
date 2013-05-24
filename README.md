@@ -12,10 +12,10 @@ Add this line to your application's Gemfile:
 
 Or, add it into your test group
 
-	group :test do
-		gem 'capybara-bootstrap-datepicker'
-		...
-	end
+    group :test do
+        gem 'capybara-bootstrap-datepicker'
+        ...
+    end
 
 And then execute:
 
@@ -30,15 +30,20 @@ The gem automatically hook itself into rspec helper using Rspec.configure.
 ## Usage
 
 Just use this method inside your capybara test:
-	select_date(2.weeks.ago, from: "Label of the date input")
+
+    select_date(2.weeks.ago, from: "Label of the date input")
 
 Or even:
+
+    select_date(Date.tomorrow, from: "Label of the date input", format: "%d/%m/%Y")
     select_date("2013-05-24", xpath: "//path_to//your_date_input", datepicker: :bootstrap)
 
 Available options are:
-    from - the label of your date input
-    xpath - the path to your date input
-    datepicker - the way to fill your date input (:bootstrap = by clicking the popover using [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker) ; by default it just fill the input date)
++ **from:** the label of your date input
++ **xpath:** the path to your date input
++ **format:** the format used to fill your date input
++ **datepicker:** the way to fill your date input (:bootstrap = by clicking the popover using [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker))
+    ; by default it just fill the input date.
 
 ## Contributing
 
