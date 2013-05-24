@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Helper for triggering date input for bootstrap-datepicker javascript library}
   gem.homepage      = "https://github.com/akarzim/capybara-bootstrap-datepicker"
   gem.summary       = gem.description
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
