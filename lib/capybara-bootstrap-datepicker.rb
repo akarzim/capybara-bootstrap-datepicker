@@ -45,7 +45,7 @@ module Capybara
 
         datepicker_years.find('.year', text: date.year).click
         datepicker_months.find('.month', text: date.strftime("%b")).click
-        datepicker_days.find('.day', text: date.day).click
+        datepicker_days.find(:xpath, ".//*[contains(concat(' ', @class, ' '), ' day ') and not(contains(concat(' ', @class, ' '), ' old ')) and not(contains(concat(' ', @class, ' '), ' new '))]", text: date.day).click
       when :jquery
         raise "jQuery UI datepicker support is not implemented."
       else
