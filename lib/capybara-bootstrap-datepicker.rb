@@ -11,11 +11,9 @@ module Capybara
       from = options.delete :from
       xpath = options.delete :xpath
 
-      locator = xpath ? first(:xpath, xpath) : from
-
       date = value.is_a?(Date) || value.is_a?(Time) ?  value : Date.parse(value)
 
-      date_input = find(:fillable_field, locator, options)
+      date_input = xpath ? find(:xpath, xpath, options) : find_field(from, options)
 
       case picker
       when :bootstrap
