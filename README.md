@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/capybara-bootstrap-datepicker.png)](http://badge.fury.io/rb/capybara-bootstrap-datepicker)
+
 # Capybara::BootstrapDatepicker
 
 Helper for triggering date input for bootstrap-datepicker javascript library
