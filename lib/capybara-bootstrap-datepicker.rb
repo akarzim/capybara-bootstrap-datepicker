@@ -1,66 +1,67 @@
-require "capybara-bootstrap-datepicker/version"
+require 'capybara-bootstrap-datepicker/version'
 require 'rspec/core'
 
 module Capybara
   module BootstrapDatepicker
-    def select_date(value, options = {})
-      raise "Must pass a hash containing 'from' or 'xpath'" unless options.is_a?(Hash) and [:from, :xpath].any? { |k| options.has_key? k }
+    def select_date(value, datepicker: :boostrap, format: nil, from: nil, xpath: nil)
+      fail "Must pass a hash containing 'from' or 'xpath'" if from.nil? && xpath.nil?
 
-      picker = options.delete :datepicker
-      format = options.delete :format
-      from = options.delete :from
-      xpath = options.delete :xpath
+      value = Date.parse(value) unless value.respond_to? :to_date
 
-      date = value.is_a?(Date) || value.is_a?(Time) ?  value : Date.parse(value)
+      date_input = xpath ? find(:xpath, xpath) : find_field(from)
 
-      date_input = xpath ? find(:xpath, xpath, options) : find_field(from, options)
-
-      case picker
+      case datepicker
       when :bootstrap
-        date_input.click
-        datepicker = find(:xpath, '//body').find('.datepicker')
-
-        datepicker_years = datepicker.find('.datepicker-years', visible: false)
-        datepicker_months = datepicker.find('.datepicker-months', visible: false)
-        datepicker_days = datepicker.find('.datepicker-days', visible: false)
-
-        datepicker_current_decade = datepicker_years.find('th.datepicker-switch', visible: false)
-        datepicker_current_year = datepicker_months.find('th.datepicker-switch', visible: false)
-        datepicker_current_month = datepicker_days.find('th.datepicker-switch', visible: false)
-
-        datepicker_current_month.click if datepicker_days.visible?
-        datepicker_current_year.click if datepicker_months.visible?
-
-        decade_start, decade_end = datepicker_current_decade.text.split('-').map &:to_i
-
-        if date.year < decade_start.to_i
-          gap = decade_start/10 - date.year/10
-          gap.times { datepicker_years.find('th.prev').click }
-        elsif date.year > decade_end
-          gap = date.year/10 - decade_end/10
-          gap.times { datepicker_years.find('th.next').click }
-        end
-
-        datepicker_years.find('.year', text: date.year).click
-        datepicker_months.find('.month', text: date.strftime("%b")).click
-        day_xpath = <<-eos
-        .//*[contains(concat(' ', @class, ' '), ' day ')
-        and not(contains(concat(' ', @class, ' '), ' old '))
-        and not(contains(concat(' ', @class, ' '), ' new '))
-        and normalize-space(text())='#{date.day}']
-        eos
-        datepicker_days.find(:xpath, day_xpath).trigger :click
-
-        expect(Date.parse date_input.value).to eq date
-        expect(page).to have_no_css '.datepicker'
-      when :jquery
-        raise "jQuery UI datepicker support is not implemented."
+        select_bootstrap_date date_input, value
       else
-        date = date.strftime format unless format.nil?
-
-        date_input.set "#{date}\e"
-        first(:xpath, '//body').click
+        select_simple_date date_input, value
       end
+    end
+
+    def select_simple_date(date_input, value)
+      value = value.strftime format if format.present?
+
+      date_input.set "#{value}\e"
+      first(:xpath, '//body').click
+    end
+
+    def select_bootstrap_date(date_input, value)
+      date_input.click
+      picker = find(:xpath, '//body').find('.datepicker')
+
+      picker_years = picker.find('.datepicker-years', visible: false)
+      picker_months = picker.find('.datepicker-months', visible: false)
+      picker_days = picker.find('.datepicker-days', visible: false)
+
+      picker_current_decade = picker_years.find('th.datepicker-switch', visible: false)
+      picker_current_year = picker_months.find('th.datepicker-switch', visible: false)
+      picker_current_month = picker_days.find('th.datepicker-switch', visible: false)
+
+      picker_current_month.click if picker_days.visible?
+      picker_current_year.click if picker_months.visible?
+
+      decade_start, decade_end = picker_current_decade.text.split('-').map(&:to_i)
+
+      if value.year < decade_start.to_i
+        gap = decade_start / 10 - value.year / 10
+        gap.times { picker_years.find('th.prev').click }
+      elsif value.year > decade_end
+        gap = value.year / 10 - decade_end / 10
+        gap.times { picker_years.find('th.next').click }
+      end
+
+      picker_years.find('.year', text: value.year).click
+      picker_months.find('.month', text: value.strftime('%b')).click
+      day_xpath = <<-eos
+          .//*[contains(concat(' ', @class, ' '), ' day ')
+          and not(contains(concat(' ', @class, ' '), ' old '))
+          and not(contains(concat(' ', @class, ' '), ' new '))
+          and normalize-space(text())='#{value.day}']
+      eos
+      picker_days.find(:xpath, day_xpath).trigger :click
+
+      fail if Date.parse(date_input.value) != value
+      fail unless page.has_no_css? '.datepicker'
     end
   end
 end
@@ -68,4 +69,3 @@ end
 RSpec.configure do |c|
   c.include Capybara::BootstrapDatepicker
 end
-
