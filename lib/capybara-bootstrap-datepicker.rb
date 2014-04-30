@@ -3,12 +3,12 @@ require 'rspec/core'
 
 module Capybara
   module BootstrapDatepicker
-    def select_date(value, datepicker: :boostrap, format: nil, from: nil, xpath: nil)
+    def select_date(value, datepicker: :boostrap, format: nil, from: nil, xpath: nil, **args)
       fail "Must pass a hash containing 'from' or 'xpath'" if from.nil? && xpath.nil?
 
       value = Date.parse(value) unless value.respond_to? :to_date
 
-      date_input = xpath ? find(:xpath, xpath) : find_field(from)
+      date_input = xpath ? find(:xpath, xpath, **args) : find_field(from, **args)
 
       case datepicker
       when :bootstrap
