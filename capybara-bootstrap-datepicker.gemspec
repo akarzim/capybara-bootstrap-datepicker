@@ -18,9 +18,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'rspec'
-  gem.add_dependency 'capybara'
-  gem.add_development_dependency 'phantomjs'
-  gem.add_development_dependency 'poltergeist'
-  gem.add_development_dependency 'pry'
+  gem.add_dependency 'rspec', '~> 3.1', '>= 3.1.0'
+  gem.add_dependency 'capybara', '~> 2.4', '>= 2.4.4'
+  gem.add_development_dependency 'phantomjs', '~> 1.9', '>= 1.9.7.1'
+  gem.add_development_dependency 'poltergeist', '~> 1.5', '>= 1.5.1'
+  gem.add_development_dependency 'pry', '~> 0.9', '>= 0.9.12.6'
 end
