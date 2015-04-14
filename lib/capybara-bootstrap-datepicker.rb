@@ -58,7 +58,7 @@ module Capybara
           and not(contains(concat(' ', @class, ' '), ' new '))
           and normalize-space(text())='#{value.day}']
       eos
-      picker_days.find(:xpath, day_xpath).trigger :click
+      picker_days.find(:xpath, day_xpath).click
 
       fail if Date.parse(date_input.value) != value
       # fail unless page.has_no_css? '.datepicker'
