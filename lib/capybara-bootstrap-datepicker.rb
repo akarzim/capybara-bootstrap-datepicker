@@ -16,51 +16,121 @@ module Capybara
       else
         select_simple_date date_input, value
       end
+
+      first(:xpath, '//body').click
     end
 
     def select_simple_date(date_input, value)
       value = value.strftime format if format.present?
 
       date_input.set "#{value}\e"
-      first(:xpath, '//body').click
     end
 
     def select_bootstrap_date(date_input, value)
       date_input.click
-      picker = find(:xpath, '//body').find('.datepicker')
 
-      picker_years = picker.find('.datepicker-years', visible: false)
-      picker_months = picker.find('.datepicker-months', visible: false)
-      picker_days = picker.find('.datepicker-days', visible: false)
+      picker = Picker.new
 
-      picker_current_decade = picker_years.find('th.datepicker-switch', visible: false)
-      picker_current_year = picker_months.find('th.datepicker-switch', visible: false)
-      picker_current_month = picker_days.find('th.datepicker-switch', visible: false)
+      picker.current_month.click if picker.days.visible?
+      picker.current_year.click if picker.months.visible?
 
-      picker_current_month.click if picker_days.visible?
-      picker_current_year.click if picker_months.visible?
+      decade_start, decade_end = picker.current_decade_minmax
 
-      decade_start, decade_end = picker_current_decade.text.split('-').map(&:to_i)
+      picker.goto_prev_decade(value.year, decade_start) if value.year < decade_start
+      picker.goto_next_decade(decade_end, value.year) if value.year > decade_end
 
-      if value.year < decade_start.to_i
-        gap = decade_start / 10 - value.year / 10
-        gap.times { picker_years.find('th.prev').click }
-      elsif value.year > decade_end
-        gap = value.year / 10 - decade_end / 10
-        gap.times { picker_years.find('th.next').click }
-      end
-
-      picker_years.find('.year', text: value.year).click
-      picker_months.find('.month', text: value.strftime('%b')).click
-      day_xpath = <<-eos
-          .//*[contains(concat(' ', @class, ' '), ' day ')
-          and not(contains(concat(' ', @class, ' '), ' old '))
-          and not(contains(concat(' ', @class, ' '), ' new '))
-          and normalize-space(text())='#{value.day}']
-      eos
-      picker_days.find(:xpath, day_xpath).click
+      picker.find_year(value.year).click
+      picker.find_month(value.strftime('%b')).click
+      picker.find_day(value.day).click
 
       fail if Date.parse(date_input.value) != value
+    end
+
+    private
+    class Picker
+      def initialize
+        @element = find_picker
+      end
+
+      def years
+        find_period :years
+      end
+
+      def months
+        find_period :months
+      end
+
+      def days
+        find_period :days
+      end
+
+      def current_decade
+        find_switch :years
+      end
+
+      def current_year
+        find_switch :months
+      end
+
+      def current_month
+        find_switch :days
+      end
+
+      def current_decade_minmax
+        current_decade.text.split('-').map(&:to_i)
+      end
+
+      def gap(min, max)
+        return 0 if min >= max
+        max/10 - min/10
+      end
+
+      def goto_prev_decade(value, decade_start)
+        gap(value, decade_start).times { click_prev_decade }
+      end
+
+      def goto_next_decade(decade_end, value)
+        gap(decade_end, value).times { click_next_decade }
+      end
+
+      def find_year(value)
+        years.find '.year', text: value
+      end
+
+      def find_month(value)
+        months.find '.month', text: value
+      end
+
+      def find_day(value)
+        day_xpath = <<-eos
+            .//*[contains(concat(' ', @class, ' '), ' day ')
+            and not(contains(concat(' ', @class, ' '), ' old '))
+            and not(contains(concat(' ', @class, ' '), ' new '))
+            and normalize-space(text())='#{value}']
+        eos
+        days.find :xpath, day_xpath
+      end
+
+      private
+      def find_picker
+        Capybara.find(:xpath, '//body').find('.datepicker')
+      end
+
+      def find_period(period)
+        @element.find(".datepicker-#{period}", visible: false)
+      end
+
+      def find_switch(period)
+        send(period).find('th.datepicker-switch', visible: false)
+      end
+
+      def click_prev_decade
+        years.find('th.prev').click
+      end
+
+      def click_next_decade
+        years.find('th.next').click
+      end
     end
   end
 end
