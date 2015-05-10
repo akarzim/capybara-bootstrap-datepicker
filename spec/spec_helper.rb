@@ -5,6 +5,7 @@ Bundler.setup
 require 'capybara-bootstrap-datepicker'
 require 'capybara'
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 require 'capybara/poltergeist'
 require 'phantomjs/poltergeist'
 
