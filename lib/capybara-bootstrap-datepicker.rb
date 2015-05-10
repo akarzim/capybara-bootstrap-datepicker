@@ -31,13 +31,8 @@ module Capybara
 
       picker = Picker.new
 
-      picker.current_month.click if picker.days.visible?
-      picker.current_year.click if picker.months.visible?
-
-      decade_start, decade_end = picker.current_decade_minmax
-
-      picker.goto_prev_decade(value.year, decade_start) if value.year < decade_start
-      picker.goto_next_decade(decade_end, value.year) if value.year > decade_end
+      picker.goto_decade_panel
+      picker.navigate_through_decades value.year
 
       picker.find_year(value.year).click
       picker.find_month(value.strftime('%b')).click
@@ -52,45 +47,15 @@ module Capybara
         @element = find_picker
       end
 
-      def years
-        find_period :years
+      def goto_decade_panel
+        current_month.click if days.visible?
+        current_year.click if months.visible?
       end
 
-      def months
-        find_period :months
-      end
-
-      def days
-        find_period :days
-      end
-
-      def current_decade
-        find_switch :years
-      end
-
-      def current_year
-        find_switch :months
-      end
-
-      def current_month
-        find_switch :days
-      end
-
-      def current_decade_minmax
-        current_decade.text.split('-').map(&:to_i)
-      end
-
-      def gap(min, max)
-        return 0 if min >= max
-        max/10 - min/10
-      end
-
-      def goto_prev_decade(value, decade_start)
-        gap(value, decade_start).times { click_prev_decade }
-      end
-
-      def goto_next_decade(decade_end, value)
-        gap(decade_end, value).times { click_next_decade }
+      def navigate_through_decades(value)
+        decade_start, decade_end = current_decade_minmax
+        goto_prev_decade(value, decade_start) if value < decade_start
+        goto_next_decade(decade_end, value) if value > decade_end
       end
 
       def find_year(value)
@@ -124,12 +89,53 @@ module Capybara
         send(period).find('th.datepicker-switch', visible: false)
       end
 
+      def years
+        find_period :years
+      end
+
+      def months
+        find_period :months
+      end
+
+      def days
+        find_period :days
+      end
+
+      def current_decade
+        find_switch :years
+      end
+
+      def current_year
+        find_switch :months
+      end
+
+      def current_month
+        find_switch :days
+      end
+
+      def current_decade_minmax
+        current_decade.text.split('-').map(&:to_i)
+      end
+
       def click_prev_decade
         years.find('th.prev').click
       end
 
       def click_next_decade
         years.find('th.next').click
+      end
+
+      def gap(min, max)
+        return 0 if min >= max
+        max/10 - min/10
+      end
+
+      def goto_prev_decade(value, decade_start)
+        gap(value, decade_start).times { click_prev_decade }
+      end
+
+      def goto_next_decade(decade_end, value)
+        gap(decade_end, value).times { click_next_decade }
       end
     end
   end
