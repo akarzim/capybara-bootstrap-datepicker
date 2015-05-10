@@ -1,4 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/capybara-bootstrap-datepicker.png)](http://badge.fury.io/rb/capybara-bootstrap-datepicker)
+[![Travis CI](https://travis-ci.org/akarzim/capybara-bootstrap-datepicker.svg?branch=master)](https://travis-ci.org/akarzim/capybara-bootstrap-datepicker.svg?branch=master)
 
 # Capybara::BootstrapDatepicker
 
