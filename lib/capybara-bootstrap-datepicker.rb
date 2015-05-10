@@ -61,7 +61,6 @@ module Capybara
       picker_days.find(:xpath, day_xpath).click
 
       fail if Date.parse(date_input.value) != value
-      # fail unless page.has_no_css? '.datepicker'
     end
   end
 end
