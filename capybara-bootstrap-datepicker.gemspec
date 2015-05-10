@@ -22,5 +22,4 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'capybara', '~> 2.4', '>= 2.4.4'
   gem.add_development_dependency 'phantomjs', '~> 1.9', '>= 1.9.7.1'
   gem.add_development_dependency 'poltergeist', '~> 1.5', '>= 1.5.1'
-  gem.add_development_dependency 'pry', '~> 0.9', '>= 0.9.12.6'
 end
