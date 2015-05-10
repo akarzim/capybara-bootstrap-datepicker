@@ -48,6 +48,12 @@ Available options are:
 + **datepicker:** the way to fill your date input (:bootstrap = by clicking the popover using [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker))
     ; by default it just fill the input date.
 
+## Test
+
+Just run rspec in your terminal:
+
+    $ rspec
+
 ## Contributing
 
 1. Fork it
