@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/capybara-bootstrap-datepicker.png)](http://badge.fury.io/rb/capybara-bootstrap-datepicker)
+[![Gem Version](https://badge.fury.io/rb/capybara-bootstrap-datepicker.svg)](http://badge.fury.io/rb/capybara-bootstrap-datepicker)
 [![Travis CI](https://travis-ci.org/akarzim/capybara-bootstrap-datepicker.svg?branch=master)](https://travis-ci.org/akarzim/capybara-bootstrap-datepicker.svg?branch=master)
 [![Code Climate](https://codeclimate.com/github/akarzim/capybara-bootstrap-datepicker/badges/gpa.svg)](https://codeclimate.com/github/akarzim/capybara-bootstrap-datepicker)
 [![Test Coverage](https://codeclimate.com/github/akarzim/capybara-bootstrap-datepicker/badges/coverage.svg)](https://codeclimate.com/github/akarzim/capybara-bootstrap-datepicker/coverage)
