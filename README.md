@@ -57,6 +57,11 @@ Just run rspec in your terminal:
 
     $ rspec
 
+## Upgrading from 0.0.x
+
+RSpec support has been split into a separate file. You'll need to change
+`spec_helper.rb` to `require 'capybara-bootstrap-datepicker/rspec'`.
+
 ## Contributing
 
 1. Fork it

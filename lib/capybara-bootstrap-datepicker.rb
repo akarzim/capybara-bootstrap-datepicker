@@ -1,5 +1,4 @@
 require 'capybara-bootstrap-datepicker/version'
-require 'rspec/core'
 
 module Capybara
   module BootstrapDatepicker
@@ -139,8 +138,4 @@ module Capybara
       end
     end
   end
-end
-
-RSpec.configure do |c|
-  c.include Capybara::BootstrapDatepicker
 end
