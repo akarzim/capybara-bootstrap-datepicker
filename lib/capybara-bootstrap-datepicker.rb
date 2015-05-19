@@ -34,7 +34,7 @@ module Capybara
       picker.navigate_through_decades value.year
 
       picker.find_year(value.year).click
-      picker.find_month(value.strftime('%b')).click
+      picker.find_month(value.month).click
       picker.find_day(value.day).click
 
       fail if Date.parse(date_input.value) != value
@@ -62,7 +62,7 @@ module Capybara
       end
 
       def find_month(value)
-        months.find '.month', text: value
+        months.find ".month:nth-child(#{value})"
       end
 
       def find_day(value)
