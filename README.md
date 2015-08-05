@@ -13,14 +13,18 @@ All this gem does is something very simple : allow you to trigger Bootstrap date
 
 Add this line to your application's Gemfile:
 
-    gem 'capybara-bootstrap-datepicker', group: :test
+```ruby
+gem 'capybara-bootstrap-datepicker', group: :test
+```
 
 Or, add it into your test group
 
-    group :test do
-        gem 'capybara-bootstrap-datepicker'
-        ...
-    end
+```ruby
+group :test do
+    gem 'capybara-bootstrap-datepicker'
+    ...
+end
+```
 
 And then execute:
 
@@ -36,13 +40,17 @@ The gem automatically hook itself into rspec helper using Rspec.configure.
 
 Just use this method inside your capybara test:
 
-    select_date(2.weeks.ago, from: "Label of the date input")
+```ruby
+select_date(2.weeks.ago, from: "Label of the date input")
+```
 
 Or even:
 
-    select_date(2.weeks.ago, from: "Date", match: :prefer_exact)
-    select_date(Date.tomorrow, from: "Label of the date input", format: "%d/%m/%Y")
-    select_date("2013-05-24", xpath: "//path_to//your_date_input", datepicker: :bootstrap)
+```ruby
+select_date(2.weeks.ago, from: "Date", match: :prefer_exact)
+select_date(Date.tomorrow, from: "Label of the date input", format: "%d/%m/%Y")
+select_date("2013-05-24", xpath: "//path_to//your_date_input", datepicker: :bootstrap)
+```
 
 Available options are:
 + **from:** the label of your date input
