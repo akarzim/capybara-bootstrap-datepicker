@@ -1,5 +1,7 @@
+# The gem's version
 module Capybara
   module BootstrapDatepicker
-    VERSION = "0.1.1"
+    # the current version of the gem
+    VERSION = '0.1.1'
   end
 end

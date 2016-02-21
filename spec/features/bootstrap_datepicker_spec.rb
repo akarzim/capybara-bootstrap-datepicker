@@ -23,4 +23,3 @@ RSpec.describe 'Bootstrap Datepicker', type: :feature do
     expect(Date.parse find_field('Label of my localized date input').value).to eq Date.today
   end
 end
-
