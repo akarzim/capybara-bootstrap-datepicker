@@ -22,4 +22,9 @@ RSpec.describe 'Bootstrap Datepicker', type: :feature do
     select_date Date.today, from: 'Label of my localized date input', datepicker: :bootstrap
     expect(Date.parse find_field('Label of my localized date input').value).to eq Date.today
   end
+
+  it 'fills in an input with DateTime object', js: true do
+    select_date DateTime.now, from: 'Label of my date input'
+    expect(Date.parse find_field('Label of my date input').value).to eq Date.today
+  end
 end
