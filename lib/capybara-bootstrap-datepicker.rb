@@ -21,7 +21,7 @@ module Capybara
       when :bootstrap
         select_bootstrap_date date_input, value
       else
-        select_simple_date date_input, value
+        select_simple_date date_input, value, format
       end
 
       first(:xpath, '//body').click
@@ -30,7 +30,7 @@ module Capybara
     # Selects a date by filling the input field
     # @param date_input the input field
     # @param value [Date] the date to set
-    def select_simple_date(date_input, value)
+    def select_simple_date(date_input, value, format)
       value = value.strftime format if format.present?
 
       date_input.set "#{value}\e"
