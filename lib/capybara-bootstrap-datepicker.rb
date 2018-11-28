@@ -13,8 +13,7 @@ module Capybara
     def select_date(value, datepicker: :bootstrap, format: nil, from: nil, xpath: nil, **args)
       fail "Must pass a hash containing 'from' or 'xpath'" if from.nil? && xpath.nil?
 
-      value = Date.parse(value) unless value.respond_to? :to_date
-
+      value = value.respond_to?(:to_date) ? value.to_date : Date.parse(value)
       date_input = xpath ? find(:xpath, xpath, **args) : find_field(from, **args)
 
       case datepicker
