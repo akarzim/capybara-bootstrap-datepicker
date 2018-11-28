@@ -1,7 +1,4 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
-
 require 'bundler/setup'
 Bundler.setup
 
@@ -14,7 +11,7 @@ require 'phantomjs/poltergeist'
 
 Capybara.configure do |config|
   config.javascript_driver = :poltergeist
-  config.app_host = File.join(File.dirname(__FILE__), 'features')
+  config.app_host = "file://#{File.expand_path('features', __dir__)}"
 end
 
 Capybara.register_driver :poltergeist do |app|

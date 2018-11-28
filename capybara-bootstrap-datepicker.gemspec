@@ -18,11 +18,11 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.required_ruby_version = '>= 2.0.0'
+  gem.required_ruby_version = '>= 2.3.8'
 
-  gem.add_development_dependency 'capybara', '~> 2.4', '>= 2.4.4'
-  gem.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
-  gem.add_development_dependency 'capybara-screenshot', '~> 1.0', '>= 1.0.9'
-  gem.add_development_dependency 'phantomjs', '~> 1.9', '>= 1.9.7.1'
-  gem.add_development_dependency 'poltergeist', '~> 1.5', '>= 1.5.1'
+  gem.add_development_dependency 'capybara', '~> 3.11', '>= 3.11.1'
+  gem.add_development_dependency 'rspec', '~> 3.8', '>= 3.8.0'
+  gem.add_development_dependency 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
+  gem.add_development_dependency 'phantomjs', '~> 2.1', '>= 2.1.1.0'
+  gem.add_development_dependency 'poltergeist', '~> 1.18', '>= 1.18.1'
 end
