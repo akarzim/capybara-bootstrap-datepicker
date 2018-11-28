@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    capybara-bootstrap-datepicker (0.1.1)
+    capybara-bootstrap-datepicker (0.1.2)
 
 GEM
   remote: https://rubygems.org/
@@ -70,4 +70,4 @@ DEPENDENCIES
   rspec (~> 3.8, >= 3.8.0)
 
 BUNDLED WITH
-   1.16.1
+   1.17.1
