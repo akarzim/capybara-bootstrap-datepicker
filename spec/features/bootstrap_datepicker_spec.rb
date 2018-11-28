@@ -13,6 +13,11 @@ RSpec.describe 'Bootstrap Datepicker', type: :feature do
     expect(Date.parse find_field('Label of my date input').value).to eq Date.today
   end
 
+  it 'fills in a standard datepicker', js: true do
+    select_date Date.today, from: 'Label of my date input', datepicker: :simple
+    expect(Date.parse find_field('Label of my date input').value).to eq Date.today
+  end
+
   it 'fills in a datepicker based on Bootstrap 3.3', js: true do
     select_date Date.today, from: 'Label of my date input', datepicker: :bootstrap
     expect(Date.parse find_field('Label of my date input').value).to eq Date.today
