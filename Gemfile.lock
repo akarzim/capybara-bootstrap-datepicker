@@ -25,7 +25,7 @@ GEM
       addressable (~> 2.3)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     phantomjs (2.1.1.0)
     poltergeist (1.18.1)
