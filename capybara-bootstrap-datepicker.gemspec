@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.name          = 'capybara-bootstrap-datepicker'
   gem.version       = Capybara::BootstrapDatepicker::VERSION
   gem.authors       = ['François Vantomme']
-  gem.email         = ['akarzim@gmail.com']
+  gem.email         = ['akarzim@pm.me']
   gem.summary       = 'Bootstrap datepicker helper for Capybara'
   gem.description   = 'Helper for triggering date input for bootstrap-datepicker javascript library'
   gem.homepage      = 'https://github.com/akarzim/capybara-bootstrap-datepicker'
