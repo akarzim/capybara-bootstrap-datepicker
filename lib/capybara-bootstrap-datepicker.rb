@@ -18,7 +18,7 @@ module Capybara
 
       case datepicker
       when :bootstrap
-        select_bootstrap_date date_input, value, format: format, skip_day: skip_day
+        select_bootstrap_date date_input, value, skip_day: skip_day
       else
         select_simple_date date_input, value, format
       end
@@ -38,7 +38,7 @@ module Capybara
 
     # Selects a date by simulating human interaction with the datepicker
     # @param (see #select_simple_date)
-    def select_bootstrap_date(date_input, value, format: nil, skip_day: false)
+    def select_bootstrap_date(date_input, value, skip_day: false)
       date_input.click
 
       picker = Picker.new
@@ -49,8 +49,6 @@ module Capybara
       picker.find_year(value.year).click
       picker.find_month(value.month).click
       picker.find_day(value.day).click if !skip_day
-
-      fail if (format.nil? ? Date.parse(date_input.value) : Date.strptime(date_input.value, format)) != value
     end
 
     private
