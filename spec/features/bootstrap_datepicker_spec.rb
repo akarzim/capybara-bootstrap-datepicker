@@ -42,6 +42,22 @@ RSpec.shared_examples 'a datepicker' do
       expect(subject).to eq Date.today
     end
   end
+
+  context 'yyyy-mm format' do
+    subject { Date.strptime(find_field('Label of my date input with YYYY-MM format').value, '%Y-%m') }
+
+    let(:date)    { Date.new(Date.today.year, Date.today.month, 1) }
+
+    it 'fills in a date without day', js: true do
+      select_date date, from: 'Label of my date input with YYYY-MM format', datepicker: :simple
+      expect(subject).to eq date
+    end
+
+    it 'fills in a date without day on Bootstrap', js: true do
+      select_date date, from: 'Label of my date input with YYYY-MM format', datepicker: :bootstrap, format: '%Y-%m'
+      expect(subject).to eq date
+    end
+  end
 end
 
 RSpec.describe 'Bootstrap Datepicker', type: :feature do
