@@ -54,7 +54,7 @@ RSpec.shared_examples 'a datepicker' do
     end
 
     it 'fills in a date without day on Bootstrap', js: true do
-      select_date date, from: 'Label of my date input with YYYY-MM format', datepicker: :bootstrap, format: '%Y-%m'
+      select_date date, from: 'Label of my date input with YYYY-MM format', datepicker: :bootstrap, format: '%Y-%m', skip_day: true
       expect(subject).to eq date
     end
   end
