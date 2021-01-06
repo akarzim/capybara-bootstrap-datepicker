@@ -28,4 +28,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'phantomjs', '~> 2.1', '>= 2.1.1.0'
   gem.add_development_dependency 'poltergeist', '~> 1.18', '>= 1.18.1'
   gem.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
+  gem.add_development_dependency 'webdrivers'
+  gem.add_development_dependency 'selenium-webdriver'
 end
