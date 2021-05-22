@@ -10,7 +10,7 @@ module Capybara
     # @param from [String, nil] the path to input field (required if `xpath` is nil)
     # @param xpath [String, nil] the xpath to input field (required if `from` is nil)
     # @param args [Hash] extra args to find the input field
-    def select_date(value, datepicker: :bootstrap, format: nil, from: nil, xpath: nil, **args)
+    def select_date(value, datepicker: :bootstrap, format: nil, from: nil, xpath: nil, skip_day: false, **args)
       fail "Must pass a hash containing 'from' or 'xpath'" if from.nil? && xpath.nil?
 
       value = value.respond_to?(:to_date) ? value.to_date : Date.parse(value)
@@ -18,7 +18,7 @@ module Capybara
 
       case datepicker
       when :bootstrap
-        select_bootstrap_date date_input, value
+        select_bootstrap_date date_input, value, skip_day: skip_day
       else
         select_simple_date date_input, value, format
       end
@@ -38,7 +38,7 @@ module Capybara
 
     # Selects a date by simulating human interaction with the datepicker
     # @param (see #select_simple_date)
-    def select_bootstrap_date(date_input, value)
+    def select_bootstrap_date(date_input, value, skip_day: false)
       date_input.click
 
       picker = Picker.new
@@ -48,9 +48,7 @@ module Capybara
 
       picker.find_year(value.year).click
       picker.find_month(value.month).click
-      picker.find_day(value.day).click
-
-      fail if Date.parse(date_input.value) != value
+      picker.find_day(value.day).click if !skip_day
     end
 
     private
