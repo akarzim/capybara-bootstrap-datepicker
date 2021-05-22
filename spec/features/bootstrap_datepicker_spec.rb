@@ -68,4 +68,16 @@ RSpec.describe 'Bootstrap Datepicker', type: :feature do
 
     it_behaves_like 'a datepicker'
   end
+
+  describe 'Boostrap 5.0' do
+    before :each do
+      Capybara.current_session.driver.visit "#{Capybara.app_host}/bootstrap-5.0.html"
+    end
+
+    it 'loads the page correctly', js: true do
+      expect(page).to have_content 'Bootstrap 5.0 Datepicker'
+    end
+
+    it_behaves_like 'a datepicker'
+  end
 end

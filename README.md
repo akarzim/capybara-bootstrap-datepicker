@@ -1,11 +1,25 @@
 [![Gem Version](https://badge.fury.io/rb/capybara-bootstrap-datepicker.svg)](http://badge.fury.io/rb/capybara-bootstrap-datepicker)
 [![Travis CI](https://travis-ci.org/akarzim/capybara-bootstrap-datepicker.svg?branch=master)](https://travis-ci.org/akarzim/capybara-bootstrap-datepicker.svg?branch=master)
 
+[Bootstrap]: https://getbootstrap.com/
+[bootstrap-datepicker]: https://github.com/eternicode/bootstrap-datepicker
+[jQuery]: https://jquery.com/
+
 # Capybara::BootstrapDatepicker
 
-Helper for triggering date input for bootstrap-datepicker javascript library
+Helper for triggering date input with the [bootstrap-datepicker] JavaScript
+library.
 
-All this gem does is something very simple : allow you to trigger Bootstrap datepicker to select the date you want.
+This gem does something very simple: it allows you to trigger the [Bootstrap]
+date picker to select the date you want.
+
+## Supported versions
+
+This gem has been tested with:
+
+- [Bootstrap] 5.0.1 + [bootstrap-datepicker] 1.9.0 + [jQuery] 3.6.0
+- [Bootstrap] 4.4.1 + [bootstrap-datepicker] 1.9.0 + [jQuery] 3.4.1
+- [Bootstrap] 3.4.1 + [bootstrap-datepicker] 1.9.0 + [jQuery] 3.4.1
 
 ## Installation
 
@@ -32,17 +46,17 @@ Or install it yourself as:
 
     $ gem install capybara-bootstrap-datepicker
 
-The gem automatically hook itself into rspec helper using Rspec.configure.
+The gem automatically hooks itself into RSpec helper using `RSpec.configure`.
 
 ## Usage
 
-Just use this method inside your capybara test:
+Just use this method inside your Capybara test:
 
 ```ruby
 select_date(2.weeks.ago, from: "Label of the date input")
 ```
 
-Or even:
+Or in a more advanced way:
 
 ```ruby
 select_date(2.weeks.ago, from: "Date", match: :prefer_exact)
@@ -51,15 +65,19 @@ select_date("2013-05-24", xpath: "//path_to//your_date_input", datepicker: :boot
 ```
 
 Available options are:
-+ **from:** the label of your date input
-+ **xpath:** the path to your date input
-+ **format:** the format used to fill your date input
-+ **datepicker:** the way to fill your date input (:bootstrap = by clicking the popover using [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker))
-    ; by default it just fill the input date.
+
+- **from**: the label of your date input
+- **xpath**: the path to your date input
+- **format**: the format used to fill your date input
+- **match**:
+- **datepicker**: the way to fill your date input
+  - `:bootstrap` = by clicking the popover using [bootstrap-datepicker]
+  - `:simple` = just fill the input date
+- any extra args to find the input field
 
 ## Test
 
-Just run rspec in your terminal:
+Just run RSpec in your terminal:
 
     $ rspec
 
