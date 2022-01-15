@@ -23,6 +23,42 @@ RSpec.shared_examples 'a datepicker' do
       select_date DateTime.now, from: 'Label of my date input'
       expect(subject).to eq Date.today
     end
+
+    context 'decade discovery' do
+      let(:current_decade_start) { Date.today.year / 10 * 10 }
+
+      it 'fills in date in previous decade', js: true do
+        # when decade is 2020, date is 2018-01-01
+        date = Date.new(current_decade_start - 2, 1, 1)
+
+        select_date date , from: 'Label of my date input'
+        expect(subject).to eq date
+      end
+
+      it 'fills in date in next decade', js: true do
+        # when decade is 2020, date is 2032-01-01
+        date = Date.new(current_decade_start + 12, 1, 1)
+
+        select_date date , from: 'Label of my date input'
+        expect(subject).to eq date
+      end
+
+      it 'fills in date 3 decades in the past', js: true do
+        # when decade is 2020, date is 1998-01-01
+        date = Date.new(current_decade_start - 22, 1, 1)
+
+        select_date date , from: 'Label of my date input'
+        expect(subject).to eq date
+      end
+
+      it 'fills in date 3 decades in the future', js: true do
+        # when decade is 2020, date is 2052-01-01
+        date = Date.new(current_decade_start + 32, 1, 1)
+
+        select_date date , from: 'Label of my date input'
+        expect(subject).to eq date
+      end
+    end
   end
 
   context 'locale date' do
