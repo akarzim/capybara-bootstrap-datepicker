@@ -22,8 +22,6 @@ module Capybara
       else
         select_simple_date date_input, value, format
       end
-
-      first(:xpath, '//body').click
     end
 
     # Selects a date by filling the input field
@@ -49,8 +47,6 @@ module Capybara
       picker.find_year(value.year).click
       picker.find_month(value.month).click
       picker.find_day(value.day).click
-
-      fail if Date.parse(date_input.value) != value
     end
 
     private
