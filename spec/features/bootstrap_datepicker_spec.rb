@@ -70,6 +70,26 @@ RSpec.shared_examples 'a datepicker' do
     end
   end
 
+  context 'with dialog callback' do
+    subject { Date.parse(find_field('Label of date input with dialog callback').value) }
+
+    it 'fills in a datepicker while passing alert dialog', :js do
+      accept_alert 'Date has changed' do
+        select_date Date.today, from: 'Label of date input with dialog callback', datepicker: :simple
+      end
+
+      expect(subject).to eq Date.today
+    end
+
+    it 'fills in a datepicker while passing alert dialog on Bootstrap', :js do
+      accept_alert 'Date has changed' do
+        select_date Date.today, from: 'Label of date input with dialog callback', datepicker: :bootstrap
+      end
+
+      expect(subject).to eq Date.today
+    end
+  end
+
   context 'with locale date' do
     subject { Date.parse(find_field('Label of my localized date input').value) }
 
