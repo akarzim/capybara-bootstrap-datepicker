@@ -90,39 +90,19 @@ RSpec.shared_examples 'a datepicker' do
 end
 
 RSpec.describe 'Bootstrap Datepicker', type: :feature do
-  describe 'Boostrap 3.4' do
-    before do
-      Capybara.current_session.driver.visit "#{Capybara.app_host}/bootstrap-3.4.html"
+  bootstrap_versions = ['3.4', '4.4', '5.0', '5.3']
+
+  bootstrap_versions.each do |version|
+    describe "Boostrap #{version}" do
+      before do
+        Capybara.current_session.driver.visit "#{Capybara.app_host}/bootstrap-#{version}.html"
+      end
+
+      it 'loads the page correctly', :js do
+        expect(page).to have_content "Bootstrap #{version} Datepicker"
+      end
+
+      it_behaves_like 'a datepicker'
     end
-
-    it 'loads the page correctly', :js do
-      expect(page).to have_content 'Bootstrap 3.4 Datepicker'
-    end
-
-    it_behaves_like 'a datepicker'
-  end
-
-  describe 'Boostrap 4.4' do
-    before do
-      Capybara.current_session.driver.visit "#{Capybara.app_host}/bootstrap-4.4.html"
-    end
-
-    it 'loads the page correctly', :js do
-      expect(page).to have_content 'Bootstrap 4.4 Datepicker'
-    end
-
-    it_behaves_like 'a datepicker'
-  end
-
-  describe 'Boostrap 5.0' do
-    before do
-      Capybara.current_session.driver.visit "#{Capybara.app_host}/bootstrap-5.0.html"
-    end
-
-    it 'loads the page correctly', :js do
-      expect(page).to have_content 'Bootstrap 5.0 Datepicker'
-    end
-
-    it_behaves_like 'a datepicker'
   end
 end

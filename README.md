@@ -17,6 +17,7 @@ date picker to select the date you want.
 
 This gem has been tested with:
 
+- [Bootstrap] 5.3.3 + [bootstrap-datepicker] 1.10.0 + [jQuery] 3.7.1
 - [Bootstrap] 5.0.1 + [bootstrap-datepicker] 1.9.0 + [jQuery] 3.6.0
 - [Bootstrap] 4.4.1 + [bootstrap-datepicker] 1.9.0 + [jQuery] 3.4.1
 - [Bootstrap] 3.4.1 + [bootstrap-datepicker] 1.9.0 + [jQuery] 3.4.1
