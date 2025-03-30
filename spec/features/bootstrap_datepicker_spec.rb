@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples 'a datepicker' do
-  context 'default date' do
+  context 'with default date' do
     subject { Date.parse(find_field('Label of my date input').value) }
 
     it 'fills in an input without using the datepicker', :js do
@@ -25,7 +25,7 @@ RSpec.shared_examples 'a datepicker' do
     end
   end
 
-  context 'locale date' do
+  context 'with locale date' do
     subject { Date.parse(find_field('Label of my localized date input').value) }
 
     it 'fills in a localized datepicker based on Bootstrap', :js do
@@ -34,7 +34,7 @@ RSpec.shared_examples 'a datepicker' do
     end
   end
 
-  context 'required date' do
+  context 'with required date' do
     subject { Date.parse(find_field('Start date').value) }
 
     it 'fills in a required datepicker based on Bootstrap', :js do
