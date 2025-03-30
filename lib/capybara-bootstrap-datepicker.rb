@@ -11,7 +11,7 @@ module Capybara
     # @param xpath [String, nil] the xpath to input field (required if `from` is nil)
     # @param args [Hash] extra args to find the input field
     def select_date(value, datepicker: :bootstrap, format: nil, from: nil, xpath: nil, **args)
-      fail "Must pass a hash containing 'from' or 'xpath'" if from.nil? && xpath.nil?
+      raise "Must pass a hash containing 'from' or 'xpath'" if from.nil? && xpath.nil?
 
       value = value.respond_to?(:to_date) ? value.to_date : Date.parse(value)
       date_input = xpath ? find(:xpath, xpath, **args) : find_field(from, **args)
@@ -50,7 +50,7 @@ module Capybara
       picker.find_month(value.month).click
       picker.find_day(value.day).click
 
-      fail if Date.parse(date_input.value) != value
+      raise if Date.parse(date_input.value) != value
     end
 
     private
