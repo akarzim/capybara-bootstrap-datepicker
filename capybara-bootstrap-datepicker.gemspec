@@ -29,4 +29,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'phantomjs', '~> 2.1', '>= 2.1.1.0'
   gem.add_development_dependency 'poltergeist', '~> 1.18', '>= 1.18.1'
   gem.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
+  gem.add_development_dependency 'rubocop', '~> 1.75', '>= 1.75.1'
+  gem.add_development_dependency 'rubocop-capybara', '~> 2.22', '>= 2.22.1'
+  gem.add_development_dependency 'rubocop-performance', '~> 1.24'
+  gem.add_development_dependency 'rubocop-rspec', '~> 3.5'
 end
