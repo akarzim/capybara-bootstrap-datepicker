@@ -18,19 +18,9 @@ Gem::Specification.new do |gem|
 
   gem.files         = `git ls-files`.split($RS)
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
   gem.required_ruby_version = '>= 2.5.7'
 
-  gem.add_development_dependency 'base64', '~> 0.2.0'
-  gem.add_development_dependency 'capybara', '~> 3.29', '>= 3.29.0'
-  gem.add_development_dependency 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
-  gem.add_development_dependency 'phantomjs', '~> 2.1', '>= 2.1.1.0'
-  gem.add_development_dependency 'poltergeist', '~> 1.18', '>= 1.18.1'
-  gem.add_development_dependency 'rspec', '~> 3.9', '>= 3.9.0'
-  gem.add_development_dependency 'rubocop', '~> 1.75', '>= 1.75.1'
-  gem.add_development_dependency 'rubocop-capybara', '~> 2.22', '>= 2.22.1'
-  gem.add_development_dependency 'rubocop-performance', '~> 1.24'
-  gem.add_development_dependency 'rubocop-rspec', '~> 3.5'
+  gem.metadata['rubygems_mfa_required'] = 'true'
 end
