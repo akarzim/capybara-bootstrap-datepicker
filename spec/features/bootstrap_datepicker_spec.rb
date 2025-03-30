@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
+require 'timecop'
+
 RSpec.shared_examples 'a datepicker' do
+  before do
+    Timecop.travel(Time.local(2023))
+  end
+
   context 'with default date' do
     subject { Date.parse(find_field('Label of my date input').value) }
 
@@ -22,6 +28,45 @@ RSpec.shared_examples 'a datepicker' do
     it 'fills in an input with DateTime object', :js do
       select_date DateTime.now, from: 'Label of my date input'
       expect(subject).to eq Date.today
+    end
+  end
+
+  context 'when decade discovery' do
+    subject { Date.parse(find_field('Label of my date input').value) }
+
+    it 'fills in date in previous decade', :js do
+      date = Date.new(2018)
+
+      select_date date, from: 'Label of my date input'
+      expect(subject).to eq date
+    end
+
+    it 'fills in date in current decade', :js do
+      date = Date.new(2021)
+
+      select_date date, from: 'Label of my date input'
+      expect(subject).to eq date
+    end
+
+    it 'fills in date in next decade', :js do
+      date = Date.new(2032)
+
+      select_date date, from: 'Label of my date input'
+      expect(subject).to eq date
+    end
+
+    it 'fills in date 3 decades in the past', :js do
+      date = Date.new(1998)
+
+      select_date date, from: 'Label of my date input'
+      expect(subject).to eq date
+    end
+
+    it 'fills in date 3 decades in the future', :js do
+      date = Date.new(2052)
+
+      select_date date, from: 'Label of my date input'
+      expect(subject).to eq date
     end
   end
 

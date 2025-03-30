@@ -95,6 +95,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
     ruby-progressbar (1.13.0)
+    timecop (0.9.10)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
@@ -122,6 +123,7 @@ DEPENDENCIES
   rubocop-capybara (~> 2.22, >= 2.22.1)
   rubocop-performance (~> 1.24)
   rubocop-rspec (~> 3.5)
+  timecop (~> 0.9.10)
 
 BUNDLED WITH
    2.3.3

@@ -185,11 +185,13 @@ module Capybara
       end
 
       # Calculates the distance in decades between min and max
+      # @param min [Fixnum] a 4 digits year
+      # @param max [Fixnum] a 4 digits year
       # @return [Fixnum] the distance in decades between min and max
       def gap(min, max)
         return 0 if min >= max
 
-        (max - min) / 10
+        ((max / 10) - (min / 10))
       end
 
       # Go backward to the wanted decade
