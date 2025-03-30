@@ -6,4 +6,4 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'nokogiri', '~> 1.18', '>= 1.18.6'
-gem 'rack', '>= 1.6.11'
+gem 'rack', '~> 3.1', '>= 3.1.12'
