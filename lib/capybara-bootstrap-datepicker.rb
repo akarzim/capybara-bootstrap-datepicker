@@ -54,7 +54,6 @@ module Capybara
       raise if Date.parse(date_input.value) != value
     end
 
-    private
 
     # The Picker class interacts with the datepicker
     class Picker
