@@ -45,6 +45,14 @@
           <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
         </div>
       </div>
+
+      <div class="form-group">
+        <label for="my-date-input-yyyy-mm">Label of my date input with YYYY-MM format</label>
+        <div class="input-group date my-date-input-yyyy-mm">
+          <input type="text" class="form-control" id="my-date-input-yyyy-mm">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+        </div>
+      </div>
     </form>
   </div>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -53,6 +61,7 @@
   <script type="text/javascript">
     $('.input-group.default-date').datepicker({ format: 'yyyy-mm-dd' });
     $('.input-group.locale-date').datepicker({ format: 'yyyy-mm-dd', language: 'ja' });
+    $('.my-date-input-yyyy-mm').datepicker({ format: 'yyyy-mm', minViewMode: 1 });
     $('#registration-period-start-datapicker').datepicker({ format: 'yyyy-mm-dd', minDate : '2019-03-06', maxDate : '2019-03-12' });
     
     $('.input-group.my-date-input-with-callbacks')

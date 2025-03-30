@@ -20,9 +20,9 @@ module Capybara
 
       case datepicker
       when :bootstrap
-        select_bootstrap_date date_input, value
+        select_bootstrap_date(date_input, value:, format:)
       else
-        select_simple_date date_input, value, format
+        select_simple_date(date_input, value:, format:)
         first(:xpath, '//body').click
       end
     end
@@ -31,7 +31,7 @@ module Capybara
     # @param date_input the input field
     # @param value [Date] the date to set
     # @param format [String, nil] a valid date format used to format value
-    def select_simple_date(date_input, value, format = nil)
+    def select_simple_date(date_input, value:, format: nil)
       value = value.strftime format unless format.nil?
 
       date_input.set "#{value}\e"
@@ -39,7 +39,7 @@ module Capybara
 
     # Selects a date by simulating human interaction with the datepicker
     # @param (see #select_simple_date)
-    def select_bootstrap_date(date_input, value)
+    def select_bootstrap_date(date_input, value:, format: nil)
       date_input.click
 
       picker = Picker.new
@@ -49,7 +49,7 @@ module Capybara
 
       picker.find_year(value.year).click
       picker.find_month(value.month).click
-      picker.find_day(value.day).click
+      picker.find_day(value.day).click if format.nil? || format.include?('%d')
     end
 
     # The Picker class interacts with the datepicker

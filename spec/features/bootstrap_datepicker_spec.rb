@@ -4,7 +4,7 @@ require 'timecop'
 
 RSpec.shared_examples 'a datepicker' do
   before do
-    Timecop.travel(Time.local(2023))
+    Timecop.travel(Time.local(2023, 3, 31))
   end
 
   context 'with default date' do
@@ -105,6 +105,20 @@ RSpec.shared_examples 'a datepicker' do
     it 'fills in a required datepicker based on Bootstrap', :js do
       select_date Date.today, from: 'Start date', datepicker: :bootstrap
       expect(subject).to eq Date.today
+    end
+  end
+
+  context 'with yyyy-mm format' do
+    subject { Date.strptime(find_field('Label of my date input with YYYY-MM format').value, '%Y-%m') }
+
+    it 'fills in a date without day', :js do
+      select_date Date.today, from: 'Label of my date input with YYYY-MM format', datepicker: :simple, format: '%Y-%m'
+      expect(subject).to eq Date.new(2023, 3)
+    end
+
+    it 'fills in a date without day on Bootstrap', :js do
+      select_date Date.today, from: 'Label of my date input with YYYY-MM format', datepicker: :bootstrap, format: '%Y-%m'
+      expect(subject).to eq Date.new(2023, 3)
     end
   end
 end
