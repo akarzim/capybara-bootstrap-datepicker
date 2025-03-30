@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'capybara-bootstrap-datepicker/version'
 
 module Capybara
@@ -53,7 +54,6 @@ module Capybara
 
       raise if Date.parse(date_input.value) != value
     end
-
 
     # The Picker class interacts with the datepicker
     class Picker
@@ -187,6 +187,7 @@ module Capybara
       # @return [Fixnum] the distance in decades between min and max
       def gap(min, max)
         return 0 if min >= max
+
         (max - min) / 10
       end
 

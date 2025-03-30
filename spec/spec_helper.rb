@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'bundler/setup'
 Bundler.setup
@@ -16,7 +17,8 @@ Capybara.configure do |config|
 end
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new app, phantomjs: Phantomjs.path, window_size: [1280, 1024], inspector: true, js_errors: false, timeout: 45
+  Capybara::Poltergeist::Driver.new app, phantomjs: Phantomjs.path, window_size: [1280, 1024], inspector: true,
+                                         js_errors: false, timeout: 45
 end
 
 RSpec.configure do |config|
