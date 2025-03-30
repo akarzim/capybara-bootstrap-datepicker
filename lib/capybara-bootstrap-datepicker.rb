@@ -94,12 +94,13 @@ module Capybara
       # @param value [Fixnum] the day of the desired date
       # @return the DOM element to click on
       def find_day(value)
-        day_xpath = <<-eos
+        day_xpath = <<-XPATH
             .//*[contains(concat(' ', @class, ' '), ' day ')
             and not(contains(concat(' ', @class, ' '), ' old '))
             and not(contains(concat(' ', @class, ' '), ' new '))
             and normalize-space(text())='#{value}']
-        eos
+        XPATH
+
         days.find :xpath, day_xpath
       end
 
