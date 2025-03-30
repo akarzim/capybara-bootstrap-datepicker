@@ -4,21 +4,31 @@
 require 'bundler/setup'
 Bundler.setup
 
-require 'capybara-bootstrap-datepicker/rspec'
 require 'capybara'
 require 'capybara/rspec'
+require 'capybara-bootstrap-datepicker/rspec'
 require 'capybara-screenshot/rspec'
-require 'capybara/poltergeist'
-require 'phantomjs/poltergeist'
+require 'selenium-webdriver'
 
 Capybara.configure do |config|
-  config.javascript_driver = :poltergeist
   config.app_host = "file://#{File.expand_path('features', __dir__)}"
 end
 
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new app, phantomjs: Phantomjs.path, window_size: [1280, 1024], inspector: true,
-                                         js_errors: false, timeout: 45
+Capybara.register_driver :chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('headless')
+  options.add_argument('disable-gpu')
+  options.add_argument('--disable-translate')
+  options.add_argument('--window-size=1200,2000')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
+end
+
+Capybara.register_driver :firefox do |app|
+  options = ::Selenium::WebDriver::Firefox::Options.new
+  options.add_argument('--headless')
+  options.browser_version = "esr"
+
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options:)
 end
 
 RSpec.configure do |config|
