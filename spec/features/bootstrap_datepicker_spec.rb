@@ -8,74 +8,77 @@ RSpec.shared_examples 'a datepicker' do
   end
 
   context 'with default date' do
-    subject { Date.parse(find_field('Label of my date input').value) }
+    let(:label) { 'Label of my date input' }
+    subject { Date.parse(find_field(label).value) }
 
     it 'fills in an input without using the datepicker', :js do
-      select_date Date.today, from: 'Label of my date input'
+      select_date Date.today, from: label
       expect(subject).to eq Date.today
     end
 
     it 'fills in a standard datepicker', :js do
-      select_date Date.today, from: 'Label of my date input', datepicker: :simple
+      select_date Date.today, from: label, datepicker: :simple
       expect(subject).to eq Date.today
     end
 
     it 'fills in a datepicker based on Bootstrap', :js do
-      select_date Date.today, from: 'Label of my date input', datepicker: :bootstrap
+      select_date Date.today, from: label, datepicker: :bootstrap
       expect(subject).to eq Date.today
     end
 
     it 'fills in an input with DateTime object', :js do
-      select_date DateTime.now, from: 'Label of my date input'
+      select_date DateTime.now, from: label
       expect(subject).to eq Date.today
     end
   end
 
   context 'when decade discovery' do
-    subject { Date.parse(find_field('Label of my date input').value) }
+    let(:label) { 'Label of my date input' }
+    subject { Date.parse(find_field(label).value) }
 
     it 'fills in date in previous decade', :js do
       date = Date.new(2018)
 
-      select_date date, from: 'Label of my date input'
+      select_date date, from: label
       expect(subject).to eq date
     end
 
     it 'fills in date in current decade', :js do
       date = Date.new(2021)
 
-      select_date date, from: 'Label of my date input'
+      select_date date, from: label
       expect(subject).to eq date
     end
 
     it 'fills in date in next decade', :js do
       date = Date.new(2032)
 
-      select_date date, from: 'Label of my date input'
+      select_date date, from: label
       expect(subject).to eq date
     end
 
     it 'fills in date 3 decades in the past', :js do
       date = Date.new(1998)
 
-      select_date date, from: 'Label of my date input'
+      select_date date, from: label
       expect(subject).to eq date
     end
 
     it 'fills in date 3 decades in the future', :js do
       date = Date.new(2052)
 
-      select_date date, from: 'Label of my date input'
+      select_date date, from: label
       expect(subject).to eq date
     end
   end
 
   context 'with dialog callback' do
-    subject { Date.parse(find_field('Label of date input with dialog callback').value) }
+    let(:label) { 'with dialog callback' }
+    subject { Date.parse(find_field(label).value) }
 
     it 'fills in a datepicker while passing alert dialog', :js do
       accept_alert 'Date has changed' do
-        select_date Date.today, from: 'Label of date input with dialog callback', datepicker: :simple
+        select_date Date.today, from: label, datepicker: :simple
       end
 
       expect(subject).to eq Date.today
@@ -83,7 +86,7 @@ RSpec.shared_examples 'a datepicker' do
 
     it 'fills in a datepicker while passing alert dialog on Bootstrap', :js do
       accept_alert 'Date has changed' do
-        select_date Date.today, from: 'Label of date input with dialog callback', datepicker: :bootstrap
+        select_date Date.today, from: label, datepicker: :bootstrap
       end
 
       expect(subject).to eq Date.today
@@ -91,33 +94,36 @@ RSpec.shared_examples 'a datepicker' do
   end
 
   context 'with locale date' do
-    subject { Date.parse(find_field('Label of my localized date input').value) }
+    let(:label) { 'localized date input' }
+    subject { Date.parse(find_field('localized date input').value) }
 
     it 'fills in a localized datepicker based on Bootstrap', :js do
-      select_date Date.today, from: 'Label of my localized date input', datepicker: :bootstrap
+      select_date Date.today, from: label, datepicker: :bootstrap
       expect(subject).to eq Date.today
     end
   end
 
   context 'with required date' do
-    subject { Date.parse(find_field('Start date').value) }
+    let(:label) { 'Start date' }
+    subject { Date.parse(find_field(label).value) }
 
     it 'fills in a required datepicker based on Bootstrap', :js do
-      select_date Date.today, from: 'Start date', datepicker: :bootstrap
+      select_date Date.today, from: label, datepicker: :bootstrap
       expect(subject).to eq Date.today
     end
   end
 
   context 'with yyyy-mm format' do
-    subject { Date.strptime(find_field('Label of my date input with YYYY-MM format').value, '%Y-%m') }
+    let(:label) { 'with YYYY-MM format' }
+    subject { Date.strptime(find_field(label).value, '%Y-%m') }
 
     it 'fills in a date without day', :js do
-      select_date Date.today, from: 'Label of my date input with YYYY-MM format', datepicker: :simple, format: '%Y-%m'
+      select_date Date.today, from: label, datepicker: :simple, format: '%Y-%m'
       expect(subject).to eq Date.new(2023, 3)
     end
 
     it 'fills in a date without day on Bootstrap', :js do
-      select_date Date.today, from: 'Label of my date input with YYYY-MM format', datepicker: :bootstrap, format: '%Y-%m'
+      select_date Date.today, from: label, datepicker: :bootstrap, format: '%Y-%m'
       expect(subject).to eq Date.new(2023, 3)
     end
   end
