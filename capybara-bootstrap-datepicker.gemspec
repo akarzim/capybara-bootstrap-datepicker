@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 2.5.7'
 
+  gem.add_development_dependency 'base64', '~> 0.2.0'
   gem.add_development_dependency 'capybara', '~> 3.29', '>= 3.29.0'
   gem.add_development_dependency 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
   gem.add_development_dependency 'phantomjs', '~> 2.1', '>= 2.1.1.0'

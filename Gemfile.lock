@@ -8,6 +8,7 @@ GEM
   specs:
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    base64 (0.2.0)
     capybara (3.38.0)
       addressable
       matrix
@@ -64,6 +65,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  base64 (~> 0.2.0)
   capybara (~> 3.29, >= 3.29.0)
   capybara-bootstrap-datepicker!
   capybara-screenshot (~> 1.0, >= 1.0.22)
