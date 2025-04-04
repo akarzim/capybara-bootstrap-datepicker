@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.require_paths = ['lib']
 
-  gem.required_ruby_version = '>= 2.5.7'
+  gem.required_ruby_version = '>= 3.2.8'
 
   gem.metadata['rubygems_mfa_required'] = 'true'
 end
