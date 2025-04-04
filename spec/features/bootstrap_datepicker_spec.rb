@@ -8,8 +8,9 @@ RSpec.shared_examples 'a datepicker' do
   end
 
   context 'with default date' do
-    let(:label) { 'Label of my date input' }
     subject { Date.parse(find_field(label).value) }
+
+    let(:label) { 'Label of my date input' }
 
     it 'fills in an input without using the datepicker', :js do
       select_date Date.today, from: label
@@ -33,8 +34,9 @@ RSpec.shared_examples 'a datepicker' do
   end
 
   context 'when decade discovery' do
-    let(:label) { 'Label of my date input' }
     subject { Date.parse(find_field(label).value) }
+
+    let(:label) { 'Label of my date input' }
 
     it 'fills in date in previous decade', :js do
       date = Date.new(2018)
@@ -73,8 +75,9 @@ RSpec.shared_examples 'a datepicker' do
   end
 
   context 'with dialog callback' do
-    let(:label) { 'with dialog callback' }
     subject { Date.parse(find_field(label).value) }
+
+    let(:label) { 'with dialog callback' }
 
     it 'fills in a datepicker while passing alert dialog', :js do
       accept_alert 'Date has changed' do
@@ -94,8 +97,9 @@ RSpec.shared_examples 'a datepicker' do
   end
 
   context 'with locale date' do
-    let(:label) { 'localized date input' }
     subject { Date.parse(find_field('localized date input').value) }
+
+    let(:label) { 'localized date input' }
 
     it 'fills in a localized datepicker based on Bootstrap', :js do
       select_date Date.today, from: label, datepicker: :bootstrap
@@ -104,8 +108,9 @@ RSpec.shared_examples 'a datepicker' do
   end
 
   context 'with required date' do
-    let(:label) { 'Start date' }
     subject { Date.parse(find_field(label).value) }
+
+    let(:label) { 'Start date' }
 
     it 'fills in a required datepicker based on Bootstrap', :js do
       select_date Date.today, from: label, datepicker: :bootstrap
@@ -114,8 +119,9 @@ RSpec.shared_examples 'a datepicker' do
   end
 
   context 'with yyyy-mm format' do
-    let(:label) { 'with YYYY-MM format' }
     subject { Date.strptime(find_field(label).value, '%Y-%m') }
+
+    let(:label) { 'with YYYY-MM format' }
 
     it 'fills in a date without day', :js do
       select_date Date.today, from: label, datepicker: :simple, format: '%Y-%m'

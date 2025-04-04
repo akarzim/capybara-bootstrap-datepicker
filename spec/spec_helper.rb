@@ -24,9 +24,9 @@ Capybara.register_driver :chrome do |app|
 end
 
 Capybara.register_driver :firefox do |app|
-  options = ::Selenium::WebDriver::Firefox::Options.new
+  options = Selenium::WebDriver::Firefox::Options.new
   options.add_argument('--headless')
-  options.browser_version = "esr"
+  options.browser_version = 'esr'
 
   Capybara::Selenium::Driver.new(app, browser: :firefox, options:)
 end
