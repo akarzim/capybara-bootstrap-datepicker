@@ -5,6 +5,9 @@
 [bootstrap-datepicker]: https://github.com/eternicode/bootstrap-datepicker
 [jQuery]: https://jquery.com/
 
+> [!IMPORTANT]
+> Moved to [Codeberg](https://codeberg.org/akarzim/capybara-bootstrap-datepicker).
+
 # Capybara::BootstrapDatepicker
 
 Helper for triggering date input with the [bootstrap-datepicker] JavaScript
